@@ -12,15 +12,19 @@ text='\n Wallpapers \n\n'
 scrollbar = Scrollbar(root)
 scrollbar.pack(side=RIGHT, fill=Y)
 
+y=subprocess.Popen('echo $HOME', shell=True, stdout=subprocess.PIPE)
+out=y.communicate()[0].decode().strip()+'/'
+if os.path.exists(out+".wall"):
+    pass
+else:
+    os.mkdir(out+".wall")
+
 def get_directory():
     global x
     global dire
     global text
     text='\n Wallpapers \n\n'
-    global out
     dire=e1.get()
-    y=subprocess.Popen('echo $HOME', shell=True, stdout=subprocess.PIPE)
-    out=y.communicate()[0].decode().strip()+'/'
     fil=out+'.dire.txt'
     if os.path.exists(out+'.dire.txt') and dire=='':
         with open(fil) as r:

@@ -23,7 +23,7 @@ root.geometry("700x400")
 
 
 fontboi="arial"
-tt_file = "/home/karttikeya/.do.txt"
+tt_file = "/home/trogdor/.do.txt"
 
 # file_entry = Entry(root,bg="#f1fa8c", font=(fontboi,12))
 # file_entry.insert(0,"tt.txt")
