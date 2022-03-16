@@ -23,7 +23,7 @@ def cycle():
             cmd,
             shell=True,
         )
-        sleep(900)
+        sleep(600)
 
 while True:
     cycle()
