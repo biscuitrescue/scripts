@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
-import subprocess
-a=subprocess.Popen(['dunstctl', 'is-paused'], stdout=subprocess.PIPE)
-out=a.communicate()
-x=out[0].decode().strip()
+from time import sleep
+from subprocess import run
+p1=run(
+    ['dunstctl','is-paused'],
+    capture_output=True,
+    text=True,
+)
+x=p1.stdout.strip()
+
 if x=='true':
-    subprocess.run('dunstctl set-paused false', shell=True)
-    subprocess.run("notify-send 'Notifications back on'", shell=True)
+    run('dunstctl set-paused false', shell=True)
+    run("notify-send 'Notifications back on'", shell=True)
 elif x=='false':
-    subprocess.run('dunstctl set-paused true', shell=True)
+    run("notify-send 'Notifications off'", shell=True)
+    sleep(1)
+    run('dunstctl set-paused true', shell=True)

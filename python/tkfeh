@@ -9,8 +9,6 @@ root.title("Wallpaper")
 root.configure(background="#282a36")
 root.geometry("1100x700")
 text='\n Wallpapers \n\n'
-scrollbar = Scrollbar(root)
-scrollbar.pack(side=RIGHT, fill=Y)
 
 y=subprocess.Popen('echo $HOME', shell=True, stdout=subprocess.PIPE)
 out=y.communicate()[0].decode().strip()+'/'
@@ -53,7 +51,7 @@ def get_directory():
             L2 = Label(root,text='Directory does not exist',bg="#f1fa8c",justify="left",anchor="nw", font=("space mono for powerline",12))
             L2.place(x=140,y=275,height=30,width=300)
 
-    L1 = Label(root,text=text,bg="#f1fa8c",justify="left",anchor="nw", font=("space mono for powerline",12))
+    L1 = Label(root,text=text,bg="#f1fa8c",fg="#000000",justify="left",anchor="nw", font=("space mono for powerline",12))
     L1.place(x=600,y=0,height=4000,width=4000)
 
 def set_wallpaper(a):
@@ -79,7 +77,7 @@ def set_wallpaper(a):
             L2 = Label(root,text='',bg="#282a36",justify="left",anchor="nw", font=("space mono for powerline",12))
             L2.place(x=140,y=275,height=30,width=300)
         else:
-            L2 = Label(root,text='Invalid Input',bg="#f1fa8c",justify="left",anchor="nw", font=("space mono for powerline",12))
+            L2 = Label(root,text='Invalid Input',fg="#000000",bg="#f1fa8c",justify="left",anchor="nw", font=("space mono for powerline",12))
             L2.place(x=140,y=275,height=30,width=300)
             label=Label(root, bg="#282a36", text='')
             label.place(x=55,y=320,height=270,width=480)
@@ -95,7 +93,7 @@ e2=Entry(root,bg="#aaeedd", fg="#000000", font=("space mono for powerline", 12))
 b1=Button(root,bg="#FF7696", fg="#000000", font=("space mono for powerline", 12), command=get_directory, text="Set Directory")
 b2=Button(root,bg="#FF7696", fg="#000000", font=("space mono for powerline", 12), text="Set Wallpaper", command=lambda:set_wallpaper(1))
 b3=Button(root,bg="#FF7696", fg="#000000", font=("space mono for powerline", 12), text="Preview", command=lambda:set_wallpaper(2))
-L1 = Label(root,text=text,bg="#f1fa8c",justify="left",anchor="nw", font=("space mono for powerline",12))
+L1 = Label(root,text=text,bg="#f1fa8c", fg="#000000",justify="left",anchor="nw", font=("space mono for powerline",12))
 
 e1.place(x=140, y=105, height=30, width=300)
 b1.place(x=220, y=145, height=30, width=145)
