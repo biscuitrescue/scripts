@@ -3,7 +3,7 @@
 from subprocess import run
 from time import sleep
 
-maxmem = 7
+maxmem = 6
 
 commands = [
     "lsblk -f | awk '/swap/ {printf $1}'",
