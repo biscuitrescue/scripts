@@ -2,155 +2,16 @@
 
 from subprocess import run
 from sys import argv
-
-themes = {
-    "Everforest": {
-        "openbox": "Everforest-Openbox",
-        "qtile": "everforest",
-        "nvim": "everforest",
-        "Gtk": "Everforest-Dark-BL",
-        "kitty": "everforest",
-        "polybar": "everforest",
-        "alacritty": "palenight",
-        "emacs": "everforest",
-        "zathura": "everforest",
-        "waybar": "everforest"
-    },
-    "Tam": {
-        "openbox": "Latte-Openbox",
-        "qtile": "latte",
-        "nvim": "gruvbox",
-        "Gtk": "Catppuccin-Latte",
-        "kitty": "tam",
-        "polybar": "tam",
-        "alacritty": "catppuccin",
-        "emacs": "latte",
-        "zathura": "latte",
-        "waybar": "latte"
-    },
-    "Latte": {
-        "openbox": "Latte-Openbox",
-        "qtile": "latte",
-        "nvim": "catppuccin",
-        "Gtk": "Catppuccin-Latte",
-        "kitty": "latte",
-        "polybar": "latte",
-        "alacritty": "catppuccin",
-        "emacs": "latte",
-        "zathura": "latte",
-        "waybar": "latte"
-    },
-    "Macchiato": {
-        "openbox": "Macchiato-Openbox",
-        "qtile": "macchiato",
-        "nvim": "catppuccin",
-        "Gtk": "Catppuccin-Macchiato",
-        "kitty": "macchiato",
-        "polybar": "macchiato",
-        "alacritty": "catppuccin",
-        "emacs": "macchiato",
-        "zathura": "macchiato",
-        "waybar": "macchiato"
-    },
-    "Frappe": {
-        "openbox": "Frappe-Openbox",
-        "qtile": "frappe",
-        "nvim": "catppuccin",
-        "Gtk": "Catppuccin-Frappe",
-        "kitty": "frappe",
-        "polybar": "frappe",
-        "alacritty": "catppuccin",
-        "emacs": "frappe",
-        "zathura": "frappe",
-        "waybar": "frappe"
-    },
-    "Mocha": {
-        "openbox": "Mocha-Openbox",
-        "qtile": "mocha",
-        "nvim": "catppuccin",
-        "Gtk": "Catppuccin-Mocha",
-        "kitty": "mocha",
-        "polybar": "mocha",
-        "alacritty": "catppuccin",
-        "emacs": "mocha",
-        "zathura": "mocha",
-        "waybar": "mocha"
-    },
-    "Purple": {
-        "openbox": "Purple-Openbox",
-        "qtile": "purple",
-        "nvim": "palenight",
-        "Gtk": "Nordic-darker-v40",
-        "kitty": "purple",
-        "polybar": "purple",
-        "alacritty": "dracula",
-        "emacs": "purple",
-        "zathura": "dracula",
-        "waybar": "mocha"
-    },
-    "Dracula": {
-        "openbox": "Dracula-withoutBorder",
-        "qtile": "dracula",
-        "nvim": "dracula",
-        "Gtk": "Dracula-pink-accent",
-        "kitty": "dracula",
-        "polybar": "dracula",
-        "alacritty": "dracula",
-        "emacs": "doom-dracula",
-        "zathura": "dracula",
-        "waybar": "dracula"
-    },
-    "Palenight": {
-        "openbox": "Palenight-Openbox",
-        "qtile": "palenight",
-        "nvim": "palenight",
-        "Gtk": "palenight",
-        "kitty": "palenight",
-        "polybar": "palenight",
-        "alacritty": "palenight",
-        "emacs": "doom-palenight",
-        "zathura": "palenight",
-        "waybar": "palenight"
-    },
-    "One": {
-        "openbox": "Doom-One",
-        "qtile": "one",
-        "nvim": "doom-one",
-        "Gtk": "AtomOneDarkTheme",
-        "kitty": "one",
-        "polybar": "one",
-        "alacritty": "one",
-        "emacs": "doom-one",
-        "zathura": "macchiato",
-        "waybar": "palenight"
-    },
-    "Nord": {
-        "openbox": "Nord-Openbox",
-        "qtile": "nord",
-        "nvim": "nord",
-        "Gtk": "Nordic-darker-v40",
-        "kitty": "nord",
-        "polybar": "nord",
-        "alacritty": "one",
-        "emacs": "doom-nord",
-        "zathura": "macchiato",
-        "waybar": "palenight"
-    }
-}
+from shutil import copyfile
+from os.path import exists
 
 
-thing = {
-    'openbox': ((42, (10, -8)), '.config/openbox/rc.xml'),
-    'qtile': ((7, (9, -2)), '.config/qtile/screens.py'),
-    'kitty': ((-1, (15, -6)), '.config/kitty/kitty.conf'),
-    # 'alacritty': ((-1, (33, -5)), '.config/alacritty/alacritty.yml'),
-    'Gtk': ((1, (15, -1)), '.config/gtk-3.0/settings.ini'),
-    'polybar': ((0, (40, -5)), '.config/polybar/config.ini'),
-    'nvim': ((-2, (12, -1)), '.config/nvim/init.vim'),
-    'emacs': ((34, (18, -2)), '.doom.d/config.el'),
-    'zathura': ((-1, (8,-1)), '.config/zathura/zathurarc'),
-    'waybar': ((0, (9,-7)), '.config/waybar/style.css')
-}
+def find_invim():
+    with open("/home/cafo/.config/nvim/init.vim") as f:
+        x = f.readlines()
+    for i, j in enumerate(x):
+        if "colorscheme" in j:
+            return i
 
 
 def switch_theme(obj, theme):
@@ -166,6 +27,139 @@ def switch_theme(obj, theme):
     with open(f'{home}{thing[obj][1]}', 'w') as w:
         for i in x:
             w.write(i)
+
+
+themes = {
+    "Everforest": {
+        "openbox": "Everforest-Openbox",
+        "qtile": "everforest",
+        "nvim": "everforest",
+        "Gtk": "Everforest-Dark-B",
+        "kitty": "everforest",
+        "polybar": "everforest",
+        "alacritty": "palenight",
+        "emacs": "everforest",
+        "zathura": "everforest",
+        "waybar": "everforest",
+        "dunst": "everforest",
+        "rofi": "dracula"
+    },
+    "Latte": {
+        "openbox": "Latte-Openbox",
+        "qtile": "latte",
+        "nvim": "catppuccin",
+        "Gtk": "Catppuccin-Latte",
+        "kitty": "latte",
+        "polybar": "latte",
+        "alacritty": "latte",
+        "emacs": "latte",
+        "zathura": "latte",
+        "dunst": "latte",
+        "rofi": "latte",
+        "waybar": "latte"
+    },
+    "Macchiato": {
+        "openbox": "Macchiato-Openbox",
+        "qtile": "macchiato",
+        "nvim": "catppuccin",
+        "Gtk": "Catppuccin-Macchiato",
+        "kitty": "macchiato",
+        "polybar": "macchiato",
+        "alacritty": "macchiato",
+        "emacs": "macchiato",
+        "zathura": "macchiato",
+        "dunst": "macchiato",
+        "rofi": "macchiato",
+        "waybar": "macchiato"
+    },
+    "Frappe": {
+        "openbox": "Frappe-Openbox",
+        "qtile": "frappe",
+        "nvim": "catppuccin",
+        "Gtk": "Catppuccin-Frappe",
+        "kitty": "frappe",
+        "polybar": "frappe",
+        "alacritty": "frappe",
+        "emacs": "frappe",
+        "zathura": "frappe",
+        "dunst": "frappe",
+        "rofi": "frappe",
+        "waybar": "frappe"
+    },
+    "Mocha": {
+        "openbox": "Mocha-Openbox",
+        "qtile": "mocha",
+        "nvim": "catppuccin",
+        "Gtk": "Catppuccin-Mocha-BL",
+        "kitty": "mocha",
+        "polybar": "mocha",
+        "alacritty": "mocha",
+        "emacs": "mocha",
+        "zathura": "mocha",
+        "dunst": "mocha",
+        "rofi": "mocha",
+        "waybar": "mocha"
+    },
+    "Dracula": {
+        "openbox": "Dracula-withoutBorder",
+        "qtile": "dracula",
+        "nvim": "dracula",
+        "Gtk": "dracula",
+        "kitty": "dracula",
+        "polybar": "dracula",
+        "alacritty": "dracula",
+        "emacs": "doom-dracula",
+        "zathura": "dracula",
+        "dunst": "dracula",
+        "rofi": "dracula",
+        "waybar": "dracula"
+    },
+    "Palenight": {
+        "openbox": "Palenight-Openbox",
+        "qtile": "palenight",
+        "nvim": "palenight",
+        "Gtk": "palenight",
+        "kitty": "palenight",
+        "polybar": "palenight",
+        "alacritty": "palenight",
+        "emacs": "doom-palenight",
+        "zathura": "palenight",
+        "dunst": "palenight",
+        "rofi": "palenight",
+        "waybar": "palenight"
+    },
+    "Nord": {
+        "openbox": "Nord-Openbox",
+        "qtile": "nord",
+        "nvim": "nord",
+        "Gtk": "Nordic-darker-v40",
+        "kitty": "nord",
+        "polybar": "nord",
+        "alacritty": "one",
+        "emacs": "doom-nord",
+        "zathura": "macchiato",
+        "dunst": "palenight",
+        "rofi": "palenight",
+        "waybar": "palenight"
+    },
+}
+
+
+thing = {
+    'openbox': ((42, (10, -8)), '.config/openbox/rc.xml'),
+    'qtile': ((8, (9, -2)), '.config/qtile/screens.py'),
+    'kitty': ((-1, (15, -6)), '.config/kitty/kitty.conf'),
+    'alacritty': ((61, (33, -5)), '.config/alacritty/alacritty.yml'),
+    'Gtk': ((1, (15, -1)), '.config/gtk-3.0/settings.ini'),
+    'polybar': ((0, (40, -5)), '.config/polybar/config.ini'),
+    'nvim': ((find_invim(), (12, -1)), '.config/nvim/init.vim'),
+    'emacs': ((34, (18, -2)), '.doom.d/config.el'),
+    'zathura': ((-1, (8,-1)), '.config/zathura/zathurarc'),
+    'waybar': ((0, (9,-7)), '.config/waybar/style.css'),
+    'rofi': ((-1, (8,-2)), '.config/rofi/config.rasi')
+}
+
+
 
 
 theme = argv[-1]
@@ -193,17 +187,28 @@ for i in obj:
 if theme in ['Mocha', 'Macchiato', 'Frappe', 'Latte']:
     with open(f'{home}{thing["nvim"][1]}', 'r') as f:
         x = f.readlines()
-    old = x[-7][15:-2]
-    new = x[-7].replace(old, theme.lower())
-    x[-7] = new
+    old = x[-9][15:-2]
+    new = x[-9].replace(old, theme.lower())
+    x[-9] = new
 
     with open(f'{home}{thing["nvim"][1]}', 'w') as w:
         for i in x:
             w.write(i)
+    run(
+        f"kvantummanager --set Catppuccin-{theme}-Rosewater",
+        shell=True
+    )
 run(
     f'gsettings set org.gnome.desktop.interface gtk-theme {themes[theme]["Gtk"]}',
     shell=True
 )
+
+if exists(f"{home}.themes/{themes[theme]['Gtk']}/gtk-4.0/gtk.css"):
+    copyfile(f"{home}.themes/{themes[theme]['Gtk']}/gtk-4.0/gtk.css", f"{home}.config/gtk-4.0/gtk.css")
+
+copyfile(f"{home}.config/dunst/{themes[theme]['dunst']}", f"{home}.config/dunst/dunstrc")
+
+copyfile(f"{home}.config/mako/{themes[theme]['dunst']}", f"{home}.config/mako/config")
 
 run(
     'qtile cmd-obj -o cmd -f reload_config',
@@ -215,5 +220,13 @@ run(
 )
 run(
     'killall waybar && waybar &',
+    shell=True
+)
+run(
+    'makoctl reload',
+    shell=True
+)
+run(
+    f'bash {home}.config/dunst/reload',
     shell=True
 )
