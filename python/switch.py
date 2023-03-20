@@ -6,14 +6,6 @@ from shutil import copyfile
 from os.path import exists
 
 
-def find_invim():
-    with open("/home/cafo/.config/nvim/init.vim") as f:
-        x = f.readlines()
-    for i, j in enumerate(x):
-        if "colorscheme" in j:
-            return i
-
-
 def switch_theme(obj, theme):
     with open(f'{home}{thing[obj][1]}', 'r') as f:
         x = f.readlines()
@@ -30,6 +22,20 @@ def switch_theme(obj, theme):
 
 
 themes = {
+    "One": {
+        "openbox": "Doom-One",
+        "qtile": "one",
+        "nvim": "doom-one",
+        "Gtk": "Nordic-darker-v40",
+        "kitty": "one",
+        "polybar": "one",
+        "alacritty": "one",
+        "emacs": "doom-one",
+        "zathura": "dracula",
+        "waybar": "everforest",
+        "dunst": "one",
+        "rofi": "palenight"
+    },
     "Everforest": {
         "openbox": "Everforest-Openbox",
         "qtile": "everforest",
@@ -152,8 +158,8 @@ thing = {
     'alacritty': ((61, (33, -5)), '.config/alacritty/alacritty.yml'),
     'Gtk': ((1, (15, -1)), '.config/gtk-3.0/settings.ini'),
     'polybar': ((0, (40, -5)), '.config/polybar/config.ini'),
-    'nvim': ((find_invim(), (12, -1)), '.config/nvim/init.vim'),
-    'emacs': ((34, (18, -2)), '.doom.d/config.el'),
+    'nvim': ((-1, (14, -3)), '.config/nvim/after/plugin/colors.lua'),
+    # 'emacs': ((34, (18, -2)), '.config/doom/config.el'),
     'zathura': ((-1, (8,-1)), '.config/zathura/zathurarc'),
     'waybar': ((0, (9,-7)), '.config/waybar/style.css'),
     'rofi': ((-1, (8,-2)), '.config/rofi/config.rasi')
@@ -185,13 +191,13 @@ for i in obj:
     switch_theme(i, theme)
 
 if theme in ['Mocha', 'Macchiato', 'Frappe', 'Latte']:
-    with open(f'{home}{thing["nvim"][1]}', 'r') as f:
+    with open(f"{home}.config/nvim/after/plugin/catppuccin.lua") as f:
         x = f.readlines()
-    old = x[-9][15:-2]
-    new = x[-9].replace(old, theme.lower())
-    x[-9] = new
+    old = x[1][15:-3]
+    new = x[1].replace(old, theme.lower())
+    x[1] = new
 
-    with open(f'{home}{thing["nvim"][1]}', 'w') as w:
+    with open(f"{home}.config/nvim/after/plugin/catppuccin.lua", "w") as w:
         for i in x:
             w.write(i)
     run(
