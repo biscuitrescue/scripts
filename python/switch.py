@@ -34,7 +34,7 @@ themes = {
         "zathura": "dracula",
         "waybar": "everforest",
         "dunst": "one",
-        "rofi": "palenight"
+        "rofi": "one"
     },
     "Everforest": {
         "openbox": "Everforest-Openbox",
