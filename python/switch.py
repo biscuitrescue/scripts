@@ -53,7 +53,7 @@ themes = {
     "Latte": {
         "openbox": "Latte-Openbox",
         "qtile": "latte",
-        "nvim": "catppuccin",
+        "nvim": "catppuccin-latte",
         "Gtk": "Catppuccin-Latte",
         "kitty": "latte",
         "polybar": "latte",
@@ -67,7 +67,7 @@ themes = {
     "Macchiato": {
         "openbox": "Macchiato-Openbox",
         "qtile": "macchiato",
-        "nvim": "catppuccin",
+        "nvim": "catppuccin-macchiato",
         "Gtk": "Catppuccin-Macchiato",
         "kitty": "macchiato",
         "polybar": "macchiato",
@@ -81,7 +81,7 @@ themes = {
     "Frappe": {
         "openbox": "Frappe-Openbox",
         "qtile": "frappe",
-        "nvim": "catppuccin",
+        "nvim": "catppuccin-frappe",
         "Gtk": "Catppuccin-Frappe",
         "kitty": "frappe",
         "polybar": "frappe",
@@ -95,7 +95,7 @@ themes = {
     "Mocha": {
         "openbox": "Mocha-Openbox",
         "qtile": "mocha",
-        "nvim": "catppuccin",
+        "nvim": "catppuccin-mocha",
         "Gtk": "Catppuccin-Mocha-BL",
         "kitty": "mocha",
         "polybar": "mocha",
@@ -158,8 +158,8 @@ thing = {
     'alacritty': ((61, (33, -5)), '.config/alacritty/alacritty.yml'),
     'Gtk': ((1, (15, -1)), '.config/gtk-3.0/settings.ini'),
     'polybar': ((0, (40, -5)), '.config/polybar/config.ini'),
-    'nvim': ((-1, (14, -3)), '.config/nvim/after/plugin/colors.lua'),
-    # 'emacs': ((34, (18, -2)), '.config/doom/config.el'),
+    'nvim': ((-2, (21, -3)), '.config/nvim/init.lua'),
+    'emacs': ((34, (18, -2)), '.config/doom/config.el'),
     'zathura': ((-1, (8,-1)), '.config/zathura/zathurarc'),
     'waybar': ((0, (9,-7)), '.config/waybar/style.css'),
     'rofi': ((-1, (8,-2)), '.config/rofi/config.rasi')
@@ -201,9 +201,9 @@ if theme in ['Mocha', 'Macchiato', 'Frappe', 'Latte']:
         for i in x:
             w.write(i)
     run(
-        f"kvantummanager --set Catppuccin-{theme}-Rosewater",
-        shell=True
-    )
+            f"kvantummanager --set Catppuccin-{theme}-Rosewater",
+            shell=True
+            )
 run(
     f'gsettings set org.gnome.desktop.interface gtk-theme {themes[theme]["Gtk"]}',
     shell=True
