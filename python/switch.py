@@ -42,6 +42,7 @@ def switch_theme(obj, theme):
 themes = {
     "Dark": {
         "nvim": "dark",
+        "alacritty": "hojicha",
         "kitty": "hojicha",
         "rofi": "ashes",
         "starship": "kanagawa",
@@ -49,6 +50,7 @@ themes = {
     },
     "Light": {
         "nvim": "light",
+        "alacritty": "latte",
         "kitty": "latte",
         "rofi": "latte",
         "starship": "catppuccin_latte",
@@ -59,6 +61,7 @@ themes = {
 
 thing = {
     'nvim': ((find_nvim(), (18, -2)), '.config/nvim/init.lua'),
+    'alacritty': ((-1, (38, -8)), '.config/alacritty/alacritty.toml'),
     'kitty': ((-1, (15, -6)), '.config/kitty/kitty.conf'),
     'rofi': ((-1, (8, -2)), '.config/rofi/config.rasi'),
     'starship': ((0, (11, -2)), '.config/starship.toml'),
