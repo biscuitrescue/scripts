@@ -52,7 +52,7 @@ string read(string datatype) {
 }
 
 int main() {
-    int maxmem = 5;
+    int maxmem = 6;
 
     while(true) {
         string swapdisk = read("swap");
