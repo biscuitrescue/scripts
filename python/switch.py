@@ -20,7 +20,7 @@ def find_nvim():
     with open(f"{home}.config/nvim/init.lua") as f:
         x = f.readlines()
     for i in x:
-        if "colorscheme" in i:
+        if "background" in i:
             return x.index(i)
 
 
@@ -41,15 +41,15 @@ def switch_theme(obj, theme):
 
 themes = {
     "Dark": {
-        "nvim": "hojicha",
+        "nvim": "dark",
         "kitty": "hojicha",
         "rofi": "ashes",
         "starship": "kanagawa",
         "waybar": "ink"
     },
     "Light": {
-        "nvim": "kanagawa-paper-canvas",
-        "kitty": "canvas",
+        "nvim": "light",
+        "kitty": "latte",
         "rofi": "latte",
         "starship": "catppuccin_latte",
         "waybar": "canvas"
@@ -58,7 +58,7 @@ themes = {
 
 
 thing = {
-    'nvim': ((find_nvim(), (21, -3)), '.config/nvim/init.lua'),
+    'nvim': ((find_nvim(), (18, -2)), '.config/nvim/init.lua'),
     'kitty': ((-1, (15, -6)), '.config/kitty/kitty.conf'),
     'rofi': ((-1, (8, -2)), '.config/rofi/config.rasi'),
     'starship': ((0, (11, -2)), '.config/starship.toml'),
