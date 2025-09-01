@@ -37,12 +37,12 @@ def switch_theme(obj, theme):
 themes = {
     "Dark": {
         "nvim": "dark",
-        "alacritty": "one",
+        "alacritty": "roseprime",
         "kitty": "roseprime",
         "tmux": "moon",
-        "rofi": "one",
-        "starship": "one",
-        "waybar": "one",
+        "rofi": "ashes",
+        "starship": "kanagawa",
+        "waybar": "ink",
     },
     "Light": {
         "nvim": "light",
